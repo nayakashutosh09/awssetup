@@ -22,7 +22,7 @@ phases:
       - echo stage is $STAGE
       - echo Testing access
       - echo Grabbing the current latest versions to reuse layers if possible
-      - docker pull $REPOSITORY_URI:latest
+ #     - docker pull $REPOSITORY_URI:latest
   build:
     commands:
       - echo Build started on `date`
