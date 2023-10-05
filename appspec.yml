@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands: 
+      - docker pull dev 
+hooks:
+  AfterInstall:
+    - location: scripts/install_docker.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_docker.sh
+      timeout: 300
+      runas: root	  
