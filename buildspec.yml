@@ -27,7 +27,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image.
-      - docker build -f Dockerfile --build-arg stage="dev" -t $REPOSITORY_URI:dev .
+      - docker build -f Dockerfile1 --build-arg stage="dev" -t $REPOSITORY_URI:dev .
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:$IMAGE_TAG
       - echo Build completed on `date`
       - echo Pushing the Pipeline Docker images...
