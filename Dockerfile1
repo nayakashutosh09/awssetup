@@ -1,4 +1,4 @@
-FROM nayak0910/codebuildimages:20.04
+FROM nayak0910/ubuntuimage:20.04
 
 
 RUN export LANGUAGE="en_US.UTF-8" \
