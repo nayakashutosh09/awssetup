@@ -1,4 +1,5 @@
-FROM ubuntu:bionic
+FROM nayak0910/codebuildimages:20.04
+
 
 RUN export LANGUAGE="en_US.UTF-8" \
  && ln -s /usr/share/zoneinfo/UTC /etc/localtime \
