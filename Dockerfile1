@@ -1,0 +1,40 @@
+ROM ubuntu:bionic
+
+RUN export LANGUAGE="en_US.UTF-8" \
+ && ln -s /usr/share/zoneinfo/UTC /etc/localtime \
+ && apt-get -qq clean \
+ && apt-get -qq update \
+ && apt-get -qq -y install software-properties-common
+ # && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80  --recv-keys 089EBE08314DF160 \
+ # && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80  --recv-keys 51716619E084DAB9 \
+ # && add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' \
+ # && add-apt-repository 'deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu bionic main '
+
+RUN apt-get -qq update -y \
+ && apt-get -qq upgrade -y \
+ && apt-get -qq --fix-missing install -y \
+            curl \
+            ess \
+            gdal-bin \
+            git \
+            jq \
+            libgdal-dev \
+            libproj-dev \
+            libgeos-dev \
+            libudunits2-dev \
+            libv8-dev \
+            libcairo2-dev \
+            libnetcdf-dev \
+            libspatialindex-dev \
+            littler \
+            python3 \
+            python3-pip \
+            python3-gdal \
+            python3-boto3 \
+            python3-pandas \
+            python-pip \
+            r-base-core \
+            r-base-dev \
+ && pip3 install --upgrade pip \
+ && apt-get autoclean && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
