@@ -33,7 +33,6 @@ RUN apt-get -qq update -y \
             python3-gdal \
             python3-boto3 \
             python3-pandas \
-            python-pip \
             r-base-core \
             r-base-dev \
  && pip3 install --upgrade pip \
