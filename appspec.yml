@@ -5,7 +5,8 @@ phases:
     runtime-versions:
       nodejs: latest
     commands: 
-      - docker pull dev 
+      - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev
+#      - docker run -it --rm dev sh
 hooks:
   AfterInstall:
     - location: scripts/install_docker.sh
