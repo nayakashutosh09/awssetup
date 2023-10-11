@@ -5,13 +5,17 @@ phases:
     runtime-versions:
       nodejs: latest
     commands: 
-#      - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev
+      - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev
 #      - docker run -it --rm dev sh
 hooks:
-  AfterInstall:
+  BeforeInstall:
     - location: scripts/install_docker.sh
       timeout: 300
       runas: root
+#  AfterInstall:
+#    - location: scripts/install_docker.sh
+#      timeout: 300
+#      runas: root
   ApplicationStart:
     - location: scripts/start_docker.sh
       timeout: 300
