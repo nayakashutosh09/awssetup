@@ -35,3 +35,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo write definitions file...
+      - printf '[{"name":"CI-CD-Pipeline-Precision-Ag","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > docker_file.json
+artifacts:
+  files: docker_file.json
