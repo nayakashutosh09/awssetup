@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM nayak0910/ubuntuimage:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
