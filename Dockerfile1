@@ -1,6 +1,6 @@
 FROM nayak0910/ubuntuimage:20.04
 
-
+EXPOSE 80
 RUN export LANGUAGE="en_US.UTF-8" \
  && ln -s /usr/share/zoneinfo/UTC /etc/localtime \
  && apt-get -qq clean \
