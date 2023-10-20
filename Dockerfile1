@@ -1,5 +1,5 @@
-#FROM nayak0910/ubuntuimage:20.04
-FROM ubuntu:20.04
+FROM nayak0910/ubuntuimage:20.04
+#FROM ubuntu:20.04
 
 WORKDIR /app
 
@@ -41,7 +41,7 @@ RUN apt-get -qq update -y \
  && apt-get autoclean && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN yarn install
-CMD ["node", "index.js"]
+#RUN yarn install
+CMD ["index.js"]
 
 EXPOSE 3000
