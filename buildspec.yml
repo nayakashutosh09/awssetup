@@ -36,6 +36,6 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo write definitions file...
-      - printf '[{"name":"dev","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > docker_file.json
+      - printf '[{"name":"development_mac","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > docker_file.json
 artifacts:
   files: docker_file.json
