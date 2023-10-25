@@ -9,7 +9,8 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     apt-get update && \
     apt-get install -y software-properties-common
 
-FROM --platform=linux/amd64 node:18-alpine
+#FROM --platform=linux/amd64 node:18-alpine
+FROM public.ecr.aws/docker/library/alpine:latest
 
 WORKDIR /app
 COPY . .
