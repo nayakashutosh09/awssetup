@@ -28,7 +28,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image.
       - docker build -f Dockerfile1 --build-arg stage="dev" -t $REPOSITORY_URI:dev .
-      - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:$IMAGE_TAG
+    #  - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:development_mac
       - echo Build completed on `date`
       - echo Pushing the Pipeline Docker images...
       - docker push $REPOSITORY_URI:dev
@@ -36,6 +37,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo write definitions file...
-      - printf '[{"name":"development_mac","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > docker_file.json
+     # - printf '[{"name":"development_mac","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > docker_file.json
+      - printf '[{"name":"development_mac","imageUri":"%s"}]' $REPOSITORY_URI:development_mac > docker_file.json
 artifacts:
   files: docker_file.json
