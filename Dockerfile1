@@ -1,4 +1,8 @@
 #FROM nayak0910/ubuntuimage:20.04
+
+FROM debian:bullseye-slim
+COPY daemon.json /etc/docker/daemon.json
+
 FROM public.ecr.aws/lts/ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
