@@ -1,0 +1,7 @@
+REGION="ZAF"
+REGION_COUNT="us-east-1"
+DIRECTORY_PATH="/Users/efzqd/Downloads/installer"
+USERNAME="ashutosh.nayak.ext@bayer.com"
+PASSWORD="ByrAshNa22!"
+ACCOUNT1="374898892977"
+ACCOUNT2="559866444233"
