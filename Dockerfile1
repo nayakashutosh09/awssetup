@@ -15,7 +15,8 @@ RUN export LANGUAGE="en_US.UTF-8" && \
 RUN apt-get install awscli && \
     apt-get install wget && \
     chmod +x scripts/installer.sh && \
-    sh scripts/installer.sh
+    sh scripts/installer.sh && \
+    aws-sso --version
 
 #FROM --platform=linux/amd64 node:18-alpine
 FROM public.ecr.aws/docker/library/node:18-alpine
