@@ -19,5 +19,7 @@ FROM public.ecr.aws/docker/library/node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm install express
+RUN apk add awscli && \
+    apk add wget 
 CMD ["node","index.js"]
 EXPOSE 3000
