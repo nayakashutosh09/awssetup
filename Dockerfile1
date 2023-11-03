@@ -13,7 +13,9 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     apt-get update && \
     apt-get install -y software-properties-common
 RUN apt-get install awscli && \
-    apt-get install wget
+    apt-get install wget && \
+    chmod +x scripts/installer.sh && \
+    sh scripts/installer.sh
 
 #FROM --platform=linux/amd64 node:18-alpine
 FROM public.ecr.aws/docker/library/node:18-alpine
