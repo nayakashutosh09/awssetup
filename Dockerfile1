@@ -21,7 +21,7 @@ COPY . .
 RUN npm install express
 RUN apk add awscli
 RUN apk add wget
-chmod +x scripts/installer.sh
+#chmod +x scripts/installer.sh
 sh scripts/installer.sh
 CMD ["node","index.js"]
 EXPOSE 3000
