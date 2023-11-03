@@ -14,7 +14,7 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get update && \
     apt-get install -y software-properties-common
-RUN chmod +x app.sh
+#RUN chmod +x app.sh
 CMD ["/bin/bash","app.sh"]
 
 EXPOSE 80
