@@ -17,4 +17,4 @@ RUN export LANGUAGE="en_US.UTF-8" && \
 #RUN chmod +x app.sh
 CMD ["/bin/bash","app.sh"]
 
-EXPOSE 80
+EXPOSE 3000
