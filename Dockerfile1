@@ -12,11 +12,6 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get update && \
     apt-get install -y software-properties-common
-RUN apt-get install awscli && \
-    apt-get install wget && \
-    chmod +x scripts/installer.sh && \
-    sh scripts/installer.sh && \
-    aws-sso --version
 
 #FROM --platform=linux/amd64 node:18-alpine
 FROM public.ecr.aws/docker/library/node:18-alpine
@@ -24,5 +19,9 @@ FROM public.ecr.aws/docker/library/node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm install express
+RUN apk add awscli
+RUN apk add wget
+chmod +x scripts/installer.sh
+sh scripts/installer.sh
 CMD ["node","index.js"]
 EXPOSE 3000
