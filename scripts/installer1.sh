@@ -9,8 +9,8 @@ ACCOUNT1="374898892977"
 REPOSITORY_URI=$ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
 
 echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': STARTED *****************-----------------"
-sudo yum install awscli
-sudo aws --version
+yum install awscli
+aws --version
 #AWS_ACCESS_KEY_ID="enter"
 #AWS_SECRET_ACCESS_KEY="enter"
 #AWS_DEFAULT_REGION="us-east-1"
