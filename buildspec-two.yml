@@ -1,15 +1,21 @@
 version: 0.2
-
-jobs:
-  test:
-    command:
-      - aws --version
-      - echo $AWS_DEFAULT_REGION
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
-      - docker pull $REPOSITORY_URI:$IMAGE_TAG
-      - sudo apt-get update
-      - sudo apt install python3-pip
-      - sudo pip3 install awsebcli --upgrade
-#      - run: cd ./app && npm run test
+phases:
+  install:
+    runtime-version:
+      nodejs: latest
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+   pre_build:
+     commands:
+       - aws --version
+	   - echo $AWS_DEFAULT_REGION
+	   - IMAGE_TAG=${COMMIT_HASH:=latest}
+	   - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
+       - REPOSITORY_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+   build:
+     commands:
+       - docker pull $REPOSITORY_URI:$IMAGE_TAG
+       - sudo apt-get update
+       - sudo apt install python3-pip
+       - sudo pip3 install awsebcli --upgrade
