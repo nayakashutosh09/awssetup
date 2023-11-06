@@ -4,10 +4,11 @@ DIRECTORY_PATH="/Users/efzqd/Downloads/installer"
 USERNAME="ashutosh.nayak.ext@bayer.com"
 PASSWORD="ByrAshNa22!"
 ACCOUNT2="559866444233"
+ACCOUNT1="374898892977"
 
-REPOSITORY_URI=$ACCOUNT2.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
+REPOSITORY_URI=$ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
 
-echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT2': STARTED *****************-----------------"
+echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': STARTED *****************-----------------"
 sudo yum install awscli
 sudo aws --version
 #AWS_ACCESS_KEY_ID="enter"
@@ -20,16 +21,16 @@ sudo aws --version
 #aws configure set default.region $AWS_DEFAULT_REGION
 #aws configure set default.output $AWS_OUTPUT_FORMAT
 
-aws-sso --username $USERNAME --password $PASSWORD -a $ACCOUNT2
-echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT2': COMPLETED *****************-----------------"
+aws-sso --username $USERNAME --password $PASSWORD -a $ACCOUNT1
+echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': COMPLETED *****************-----------------"
 
 echo "TASK:2"
 
-echo "-----------------***************** AWS ECR LOGIN '$ACCOUNT2' : STARTED *****************-----------------"
+echo "-----------------***************** AWS ECR LOGIN '$ACCOUNT1' : STARTED *****************-----------------"
 #password=$(aws ecr get-login-password --region us-east-1)
 #echo "$password" | docker login --username AWS --password-stdin $ACCOUNT2.dkr.ecr.us-east-1.amazonaws.com
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ACCOUNT2.dkr.ecr.us-east-1.amazonaws.com
-echo "-----------------***************** AWS ECR LOGIN '$ACCOUNT2' : COMPLETED *****************-----------------"
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com
+echo "-----------------***************** AWS ECR LOGIN '$ACCOUNT1' : COMPLETED *****************-----------------"
 
 echo "TASK:3"
 echo "-----------------***************** AWS ECR IMAGE PULLING : STARTED *****************-----------------"
