@@ -10,7 +10,6 @@ REPOSITORY_URI=$ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
 
 echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': STARTED *****************-----------------"
 yum install awscli
-yum load-transaction /tmp/yum_save_tx.2023-11-06.13-32.eoCIJy.yumtx
 /root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install --upgrade pip
 /root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install dnspython>=2.2.1
 /root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install tzlocal>=4.2
@@ -32,7 +31,7 @@ aws configure set default.output $AWS_OUTPUT_FORMAT
 
 echo "TASK:4"
 echo "-----------------***************** AWS ARTIFACTORY SETTING : STARTED *****************-----------------"
-PACKAGE_NAME="bayer-aws-sso"
+PACKAGE_NAME="bayer-aws-sso==2.0.17"
 REPO_URL="https://$USERNAME:AKCp8pRQnKwMczfgg3WqNEAKTJMu7MDxCbb2hHtDeXxpSSmFBzXhyxKMARadKBAd5AG6Dddxa@artifactory.bayer.com/artifactory/aws2-pypi-prod-util/"
 TRUSTED_HOST="artifactory.bayer.com"
 pip3 install $PACKAGE_NAME --index-url $REPO_URL --trusted-host $TRUSTED_HOST
