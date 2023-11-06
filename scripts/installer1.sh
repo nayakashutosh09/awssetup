@@ -13,6 +13,8 @@ yum install awscli
 pip install dnspython>=2.2.1
 pip install tzlocal>=4.2
 pip install boto>=2.49.0
+lxml>=4.3.4
+
 aws --version
 AWS_ACCESS_KEY_ID="enter"
 AWS_SECRET_ACCESS_KEY="enter"
