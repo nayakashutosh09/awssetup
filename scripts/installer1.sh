@@ -1,8 +1,27 @@
 #!/bin/bash
 
+DIRECTORY_PATH="/Users/efzqd/Downloads/installer"
+USERNAME="ashutosh.nayak.ext@bayer.com"
+PASSWORD="ByrAshNa22!"
 ACCOUNT2="559866444233"
 
 REPOSITORY_URI=$ACCOUNT2.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
+
+echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT2': STARTED *****************-----------------"
+sudo yum install awscli
+sudo aws --version
+#AWS_ACCESS_KEY_ID="enter"
+#AWS_SECRET_ACCESS_KEY="enter"
+#AWS_DEFAULT_REGION="us-east-1"
+#AWS_OUTPUT_FORMAT="json"
+
+#aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+#aws configure set default.region $AWS_DEFAULT_REGION
+#aws configure set default.output $AWS_OUTPUT_FORMAT
+
+aws-sso --username $USERNAME --password $PASSWORD -a $ACCOUNT2
+echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT2': COMPLETED *****************-----------------"
 
 echo "TASK:2"
 
