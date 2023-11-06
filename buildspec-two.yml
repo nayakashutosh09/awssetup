@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: latest
+      ubuntu: 20.04
    build:
      commands:
        - aws --version
