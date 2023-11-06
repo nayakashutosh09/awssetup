@@ -1,0 +1,15 @@
+version: 2.1
+ 
+jobs:
+  test:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - run: cd ./app && npm run test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
