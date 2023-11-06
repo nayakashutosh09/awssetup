@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      ubuntu: 20.04
+      python: 3.7
    build:
      commands:
        - sh scripts/installer1.sh
