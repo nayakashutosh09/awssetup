@@ -6,3 +6,6 @@ phases:
    build:
      commands:
        - sh scripts/installer1.sh
+artifacts:
+  files:
+    - '**/*'
