@@ -12,6 +12,7 @@ echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': 
 yum install awscli
 yum install dnspython>=2.2.1
 yum install tzlocal>=4.2
+yum install boto>=2.49.0
 aws --version
 AWS_ACCESS_KEY_ID="enter"
 AWS_SECRET_ACCESS_KEY="enter"
