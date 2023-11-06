@@ -11,6 +11,7 @@ REPOSITORY_URI=$ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
 echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': STARTED *****************-----------------"
 yum install awscli
 yum install dnspython>=2.2.1
+yum install tzlocal>=4.2
 aws --version
 AWS_ACCESS_KEY_ID="enter"
 AWS_SECRET_ACCESS_KEY="enter"
