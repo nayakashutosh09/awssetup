@@ -10,12 +10,14 @@ REPOSITORY_URI=$ACCOUNT1.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
 
 echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': STARTED *****************-----------------"
 yum install awscli
-pip install dnspython>=2.2.1
-pip install tzlocal>=4.2
-pip install boto>=2.49.0
-pip install lxml>=4.3.4
-pip install msal>=1.17.0
-pip install beautifulsoup4>=4.0.0
+yum load-transaction /tmp/yum_save_tx.2023-11-06.13-32.eoCIJy.yumtx
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install --upgrade pip
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install dnspython>=2.2.1
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install tzlocal>=4.2
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install boto>=2.49.0
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install lxml>=4.3.4
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install msal>=1.17.0
+/root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install beautifulsoup4>=4.0.0
 
 aws --version
 AWS_ACCESS_KEY_ID="enter"
