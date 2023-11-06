@@ -15,6 +15,7 @@ pip install tzlocal>=4.2
 pip install boto>=2.49.0
 pip install lxml>=4.3.4
 pip install msal>=1.17.0
+pip install beautifulsoup4>=4.0.0
 
 aws --version
 AWS_ACCESS_KEY_ID="enter"
