@@ -36,7 +36,8 @@ REPO_URL="https://$USERNAME:AKCp8pRQnKwMczfgg3WqNEAKTJMu7MDxCbb2hHtDeXxpSSmFBzXh
 TRUSTED_HOST="artifactory.bayer.com"
 pip3 install $PACKAGE_NAME --index-url $REPO_URL --trusted-host $TRUSTED_HOST
 echo "-----------------***************** AWS ARTIFACTORY SETTING : COMPLETED *****************-----------------"
-
+aws-sso --version
+export PATH="/root/.pyenv/versions/3.9.16/bin:$PATH"
 aws-sso --username $USERNAME --password $PASSWORD -a $ACCOUNT1
 echo "-----------------***************** AWS SSO CONFIGURATION FOR '$ACCOUNT1': COMPLETED *****************-----------------"
 
