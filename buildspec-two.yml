@@ -13,21 +13,21 @@ phases:
       - aws sts get-caller-identity
       - echo Logging in to Amazon ECR...
       - echo $(pwd)
-      - docker volume create /vsr/tmp
- #     - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
+      - docker volume create volume_precision
+ #     - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /volume_precision
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /volume_precision
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
       - echo $(pwd)
-      - docker run -v /vsr/tmp/:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r $(pwd)/* /root/
-      - docker run --rm -v /vsr/tmp/:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
+      - docker run -v /volume_precision:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r $(pwd)/* /root/
+      - docker run --rm -v /volume_precision:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
 #      - docker run --rm -v /vsr/tmp/:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /root/runh2o.sh
 #      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       
