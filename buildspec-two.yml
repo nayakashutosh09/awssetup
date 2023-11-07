@@ -25,8 +25,8 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
-      - docker exec -it --rm -v$(pwd):/vsr/tmp $REPOSITORY_URI1:dev /bin/bash /vsr/tmp/runh2o.sh
-      - docker exec -it --rm -v$(pwd):/vsr/tmp $REPOSITORY_URI2:dev /bin/bash /vsr/tmp/runpsp.sh
+      - docker run -it --rm -v $(pwd):/vsr/tmp $REPOSITORY_URI1:dev /bin/bash /vsr/tmp/runh2o.sh
+      - docker run -it --rm -v $(pwd):/vsr/tmp $REPOSITORY_URI2:dev /bin/bash /vsr/tmp/runpsp.sh
 
 #       - echo $(pwd)
 #       - docker run -it --rm -v$(pwd):$(pwd) $REPOSITORY_URI1:dev /bin/bash $(pwd)/runh2o.sh
