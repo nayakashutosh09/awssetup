@@ -25,10 +25,10 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
-      - $(pwd)
-      - docker run -v volume_prec:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r $(pwd)/* /root/
-      - docker run --rm -v volume_prec:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
-#      - docker run --rm -v volume_prec:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /root/runh2o.sh
+      - echo $(pwd)
+      - docker run -v /vsr/tmp/:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r $(pwd)/* /root/
+      - docker run --rm -v /vsr/tmp/:$(pwd) 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
+#      - docker run --rm -v /vsr/tmp/:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /root/runh2o.sh
 #      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       
 #      - docker volume create volume_prec
