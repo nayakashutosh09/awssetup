@@ -15,14 +15,14 @@ phases:
       - echo $(pwd)
       - docker volume create volume_prec
  #     - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /vsr/tmp
-      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /root
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /root
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
       - docker run -v volume_prec:/root 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r /root/* /root/
