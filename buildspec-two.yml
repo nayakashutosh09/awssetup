@@ -14,6 +14,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker pull $REPOSITORY_URI1:dev
+      - docker pull $REPOSITORY_URI2:dev
       - mkdir -p /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /vsr/tmp
@@ -24,9 +25,8 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
-      - docker run -it --rm -v$(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /vsr/tmp/runh2o.sh
-      - docker pull $REPOSITORY_URI2:dev
-      - docker run -it --rm -v$(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev /bin/bash /vsr/tmp/runpsp.sh
+      - docker exec -it --rm -v$(pwd):/vsr/tmp $REPOSITORY_URI1:dev /bin/bash /vsr/tmp/runh2o.sh
+      - docker exec -it --rm -v$(pwd):/vsr/tmp $REPOSITORY_URI2:dev /bin/bash /vsr/tmp/runpsp.sh
 
 #       - echo $(pwd)
 #       - docker run -it --rm -v$(pwd):$(pwd) $REPOSITORY_URI1:dev /bin/bash $(pwd)/runh2o.sh
