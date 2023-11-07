@@ -29,8 +29,8 @@ phases:
     commands:
       - docker pull $REPOSITORY_URI1:dev
       - docker pull $REPOSITORY_URI2:dev
-      - docker run -it --rm -v $(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /vsr/tmp/runh2o.sh
-      - docker run -it --rm -v $(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev /bin/bash /vsr/tmp/runpsp.sh
+      - docker run --rm -v $(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /vsr/tmp/runh2o.sh
+      - docker run --rm -v $(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev /bin/bash /vsr/tmp/runpsp.sh
 #       - sh scripts/installer1.sh
 artifacts:
   files:
