@@ -23,7 +23,7 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv /vsr/tmp
-      - docker run -v volume_prec:/vsr/tmp -v $(pwd):/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh -c "cp -r /vsr/tmp/* /vsr/tmp/"
+      - docker run -v volume_prec:/vsr/tmp -v $(pwd):/root/ 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh -c "cp -r /vsr/tmp/* /root/"
       
 #      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       
