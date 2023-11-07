@@ -15,7 +15,7 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker volume create volume_prec
       - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
-      - docker run -it --rm -v volume_prec:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash
+      - docker run --rm -v volume_prec:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /vsr/tmp
