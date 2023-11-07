@@ -26,7 +26,7 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker pull 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
       - docker run -v volume_prec:/root 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev cp -r /root/* /root/
-      - docker run --rm -v volume_prec:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
+      - docker run --rm -v volume_prec:/root 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev sh /root/runh2o.sh
 #      - docker run --rm -v volume_prec:/vsr/tmp 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev /bin/bash /root/runh2o.sh
 #      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       
