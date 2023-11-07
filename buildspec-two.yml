@@ -8,15 +8,23 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - echo $AWS_DEFAULT_REGION
-      - REPOSITORY_URI1=559866444233.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
+      - REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
       - REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 559866444233.dkr.ecr.us-east-1.amazonaws.com
-      - docker pull $REPOSITORY_URI1:prod
-      - wget https://dsso-ss-analytics.s3.amazonaws.com/models/Mod_5.0_QC5
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
+      - docker pull $REPOSITORY_URI1:dev
+      - mkdir -p /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh /vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv /vsr/tmp
+
 #       - echo $(pwd)
-#       - docker run -it --rm -v$(pwd):$(pwd) $REPOSITORY_URI1:prod /bin/bash $(pwd)/runh2o.sh
+#       - docker run -it --rm -v$(pwd):$(pwd) $REPOSITORY_URI1:dev /bin/bash $(pwd)/runh2o.sh
 #       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
-#       - docker pull $REPOSITORY_URI2:prod
+#       - docker pull $REPOSITORY_URI2:dev
 #       - docker run -it --rm -v$(pwd):$(pwd) $REPOSITORY_URI2:prod /bin/bash $(pwd)/runpsp.sh
 #       - sh scripts/installer1.sh
 artifacts:
