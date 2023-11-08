@@ -28,6 +28,8 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
+      - docker stop container2
+      - docker rm container2
       - docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
       - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/
       - docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/
@@ -37,6 +39,8 @@ phases:
       - docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/
       - docker start container2
       - docker exec -i container2 /bin/sh /vsr/tmp/runh2o.sh
+      - docker stop container3
+      - docker rm container3
       - docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
       - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/
       - docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/
