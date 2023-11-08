@@ -51,8 +51,10 @@ phases:
       - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
       - docker start container3
       - docker exec -i container3 /bin/sh /vsr/tmp/runpsp.sh
-      - head -n 10 /vsr/tmp/prescription.xml > prescription_file.xml
-      - aws s3 cp prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
+
+      
+ #     - head -n 10 /vsr/tmp/prescription.xml > prescription_file.xml
+ #     - aws s3 cp prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
 
       
 #      - mkdir -p vsr/tmp
