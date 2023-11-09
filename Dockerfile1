@@ -2,10 +2,6 @@
 
 FROM public.ecr.aws/lts/ubuntu:20.04
 
-COPY . .
-
-WORKDIR /app
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN export LANGUAGE="en_US.UTF-8" && \
@@ -14,7 +10,10 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get update && \
     apt-get install -y software-properties-common
-#RUN chmod +x app.sh
-CMD ["/bin/bash","app.sh"]
 
+FROM --platform=linux/amd64 node:18-alpine
+WORKDIR /app
+COPY . .
+RUN npm install express
+CMD ["node", "index.js"]
 EXPOSE 3000
