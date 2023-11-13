@@ -1,0 +1,140 @@
+{
+  "common": {
+    "seedsperbag": 80000,
+    "smoothing.threshold": 1000,
+    "nn.distance": 15,
+    "smoothing.iterations": 100
+
+  },
+  "usa": {
+    "minarea": 1,
+    "maxarea": 1000,
+    "perform_smoothing": true,
+    "smoothing.threshold": 500,
+    "binningInterval": 500,
+    "rangePrecision": 500,
+    "germination": 1.0,
+    "squareMeters2AreaConversion": 0.000247105,
+    "hitrate.min": 0.1,
+    "rowwidth": {
+      "20": {
+        "adjustment": {
+          "commercial":    2000,
+          "precommercial": 7000,
+          "foundation":    7000
+        },
+        "dry": {
+          "commercial":    { "minpop": 32000, "maxpop": 49000 },
+          "precommercial": { "minpop": 32000, "maxpop": 52000 },
+          "foundation":    { "minpop": 32000, "maxpop": 52000 }
+        },
+        "wet": {
+          "commercial":    { "minpop": 38000, "maxpop": 52000 },
+          "precommercial": { "minpop": 39000, "maxpop": 53000 },
+          "foundation":    { "minpop": 39000, "maxpop": 53000 }
+        }
+      },
+      "22": {
+        "adjustment": {
+          "commercial":    2000,
+          "precommercial": 7000,
+          "foundation":    7000
+        },
+        "dry": {
+          "commercial":    { "minpop": 32000, "maxpop": 49000 },
+          "precommercial": { "minpop": 32000, "maxpop": 52000 },
+          "foundation":    { "minpop": 32000, "maxpop": 52000 }
+        },
+        "wet": {
+          "commercial":    { "minpop": 38000, "maxpop": 52000 },
+          "precommercial": { "minpop": 39000, "maxpop": 53000 },
+          "foundation":    { "minpop": 39000, "maxpop": 53000 }
+        }
+      },
+      "30": {
+        "dry": {
+          "commercial":    { "minpop": 28000, "maxpop": 42000 },
+          "precommercial": { "minpop": 28000, "maxpop": 45000 },
+          "foundation":    { "minpop": 28000, "maxpop": 45000 }
+        },
+        "wet": {
+          "commercial":    { "minpop": 32000, "maxpop": 45000 },
+          "precommercial": { "minpop": 32000, "maxpop": 45000 },
+          "foundation":    { "minpop": 32000, "maxpop": 45000 }
+        }
+      }
+    }
+  },
+  "eme": {
+    "minpop": 60,
+    "maxpop": 92,
+    "highmaxpop": 92,
+    "minarea": 0.5,
+    "maxarea": 2000,
+    "benchmark.width": 75.0,
+    "perform_smoothing": false,
+    "smoothing.threshold": 500,
+    "binningInterval": 2000,
+    "rangePrecision": 2000,
+    "germination": 1.05,
+    "squareMeters2AreaConversion": 0.0001,
+    "hitrate.min": 0.1
+
+  },
+  "arg": {
+    "minpop": 80000,
+    "maxpop": 130000,
+    "minarea": 1,
+    "maxarea": 1000,
+    "perform_smoothing": false,
+    "smoothing.threshold": 1000,
+    "binningInterval": 4000,
+    "rangePrecision": 1000,
+    "germination": 1.0,
+    "squareMeters2AreaConversion": 0.0001,
+    "hitrate.min": 0.1
+
+  },
+  "bra": {
+    "minpop": 80000,
+    "maxpop": 130000,
+    "minarea": 1,
+    "maxarea": 1000,
+    "perform_smoothing": false,
+    "smoothing.threshold": 1000,
+    "binningInterval": 1000,
+    "rangePrecision": 1000,
+    "germination": 1.0,
+    "squareMeters2AreaConversion": 0.0001,
+    "hitrate.min": 0.1
+
+  },
+  "mex": {
+    "minpop": 80000,
+    "maxpop": 149500,
+    "minarea": 1,
+    "maxarea": 1000,
+    "perform_smoothing": false,
+    "smoothing.threshold": 1000,
+    "binningInterval": 1000,
+    "rangePrecision": 1000,
+    "germination": 1.0,
+    "squareMeters2AreaConversion": 0.0001,
+    "hitrate.min": 0.1
+
+  },
+  "zaf": {
+    "minpop": 80000,
+    "maxpop": 130000,
+    "minarea": 1,
+    "maxarea": 500,
+    "perform_smoothing": false,
+    "smoothing.threshold": 1000,
+    "binningInterval": 1000,
+    "rangePrecision": 1000,
+    "germination": 1.0,
+    "squareMeters2AreaConversion": 0.0001,
+    "hitrate.min": 0.1
+
+  }
+}
