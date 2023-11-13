@@ -39,24 +39,24 @@ phases:
       - docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp
       - docker start container2
       - docker exec -i container2 /bin/sh /vsr/tmp/runh2o.sh
-      - docker exec -i container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
-      - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/calibrateddata.csv container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/yieldpotential.csv container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/rates.csv container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/runpsp.sh container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/pipeline-config.json container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/prescription.xml container2:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/prescription.xsd container2:/vsr/tmp/
-      - docker start container2
-      - docker exec -i container2 /bin/sh /vsr/tmp/runpsp.sh
+      - docker exec -i container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
+      - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/calibrateddata.csv container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/yieldpotential.csv container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/
+      - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
+      - docker start container3
+      - docker exec -i container3 /bin/sh /vsr/tmp/runpsp.sh
       
  #     - docker exec -i container2 /bin/sh head -n 10 /vsr/tmp/prescription.xml > /home/prescription_file.xml
-      - docker exec -it container2 /bin/sh -c 'cat /vsr/tmp/prescription.xml | head -n 10' > /home/prescription_bkp.xml
-      - docker start container2
-      - docker exec -i container2 /bin/sh apt-get install -y awscli
-      - docker exec -i container2 /bin/sh aws s3 cp /home/prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
+      - docker exec -it container3 /bin/sh -c 'cat /vsr/tmp/prescription.xml | head -n 10' > /home/prescription_bkp.xml
+      - docker start container3
+      - docker exec -i container3 /bin/sh apt-get install -y awscli
+      - docker exec -i container3 /bin/sh aws s3 cp /home/prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
       
