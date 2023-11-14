@@ -52,7 +52,7 @@ phases:
       - docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/
       - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
       - docker start container3
-      - docker exec -i container3 "ls /vsr/tmp/"
+      - docker exec -i container3 /bin/bash ls /vsr/tmp/
       - docker exec -i container3 /bin/sh /vsr/tmp/runpsp.sh
 
       - docker exec -i container3 /bin/bash "cat /vsr/tmp/prescription.xml | head -n 10 > /home/prescription_bkp.xml"
