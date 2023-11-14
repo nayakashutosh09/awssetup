@@ -53,11 +53,15 @@ phases:
       - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
       - docker start container3
       - docker exec -i container3 /bin/sh /vsr/tmp/runpsp.sh
-      
- #     - docker exec -i container2 /bin/sh head -n 10 /vsr/tmp/prescription.xml > /home/prescription_file.xml
-      - docker exec -i container3 /bin/sh -c "cat /vsr/tmp/prescription.xml | head -n 10" > /home/prescription_bkp.xml
+
+      - docker exec -i container3 /bin/bash "cat /vsr/tmp/prescription.xml | head -n 10 > /home/prescription_bkp.xml"
       - docker start container3
-      - docker exec -i container3 /bin/sh -c "cat /home/prescription_bkp.xml"
-      - docker exec -i container3 /bin/sh -c "apt-get update && apt-get install -y awscli"
-      - docker exec -i container3 /bin/sh -c aws s3 cp /home/prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
+      - docker exec -i container3 /bin/bash "cat /home/prescription_bkp.xml" 
+ #     - docker exec -i container2 /bin/sh head -n 10 /vsr/tmp/prescription.xml > /home/prescription_file.xml
+ #     - docker exec -i container3 /bin/sh -c "cat /vsr/tmp/prescription.xml | head -n 10" > /home/prescription_bkp.xml
+ #     - docker start container3
+ #     - docker exec -i container3 /bin/sh -c "cat /home/prescription_bkp.xml"
+ #     - docker exec -i container3 /bin/sh 
+#      - docker exec -i container3 /bin/sh -c "apt-get update && apt-get install -y awscli"
+#      - docker exec -i container3 /bin/sh -c aws s3 cp /home/prescription_file.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml
       
