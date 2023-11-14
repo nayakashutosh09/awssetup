@@ -60,8 +60,8 @@ phases:
       - docker exec -i container3 /bin/bash -c "head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml"
       - docker start container3
       - docker exec -i container3 /bin/bash -c "cat /vsr/tmp/prescription_bkp.xml"
-      - docker exec -i container3 /bin/bash -c "aws --version"
-      - docker exec -i container3 /bin/bash -c "aws s3 cp /vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/prescription_file.xml"
+      - docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/
+      - aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/"
  #     - docker exec -i container2 /bin/sh head -n 10 /vsr/tmp/prescription.xml > /home/prescription_file.xml
  #     - docker exec -i container3 /bin/sh -c "cat /vsr/tmp/prescription.xml | head -n 10" > /home/prescription_bkp.xml
  #     - docker start container3
