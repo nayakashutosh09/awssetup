@@ -51,7 +51,7 @@ phases:
       - docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/
       - docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/
       - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
-      - docker exec -i container3 "ls /var/tmp/" 
+      - docker exec -i container3 "ls /vsr/tmp/" 
       - docker start container3
       - docker exec -i container3 /bin/sh /vsr/tmp/runpsp.sh
 
