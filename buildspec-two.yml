@@ -69,69 +69,11 @@ phases:
         docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/
         echo ls $(pwd)/vsr/tmp
         aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file
+      elif [ "REGION" == "ARG" ]; then
+        echo "yup"
+      else
+        echo "hey how are you"
       fi
-        elif [ "REGION" == "ARG" ]; then
-          - echo Logging in to Amazon ECR...
-          - aws --version
-          - echo $AWS_DEFAULT_REGION
-          - REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
-          - REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
-          - aws sts get-caller-identity
-          - echo Logging in to Amazon ECR...
-          - curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json
-          - aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ARG/
-          - echo $(pwd)
-          - docker volume create volume_precision
-          - mkdir -p $(pwd)/vsr/tmp
-          - echo ls $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/pipeline-config.json $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp
-          - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp
-          - echo $(pwd)/vsr/tmp
-          - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
-          - docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
-          - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/calibrateddata.csv container2:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/yieldpotential.csv container2:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/
-          - docker start container2
-          - docker exec -i container2 /bin/bash -c "ls /vsr/tmp"
-          - docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh
-          - docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
-          - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/calibrateddata.csv container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/yieldpotential.csv container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/
-          - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
-          - docker start container3
-          - docker exec -i container3 /bin/bash -c "ls /vsr/tmp/"
-          - docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh
-          - docker exec -i container3 /bin/bash -c "head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml"
-          - docker start container3
-          - docker exec -i container3 /bin/bash -c "cat /vsr/tmp/prescription_bkp.xml"
-          - docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/
-          - echo ls $(pwd)/vsr/tmp
-          - aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file
-        else
-          echo "hey how are you"
-        fi
       
 #artifacts:
 #  files:
