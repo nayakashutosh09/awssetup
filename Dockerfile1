@@ -2,7 +2,7 @@
 
 FROM public.ecr.aws/lts/ubuntu:20.04
 
-ENV REGION=ZAF \
+ENV REGION=MEX \
     DEBIAN_FRONTEND=noninteractive
 
 RUN export LANGUAGE="en_US.UTF-8" && \
