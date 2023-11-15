@@ -22,12 +22,12 @@ phases:
       - echo stage is $STAGE
       - echo Testing access
       - echo Grabbing the current latest versions to reuse layers if possible
-      - echo "REGION is $REGION"
+      - echo "REGION is " $REGION
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image.
-      - docker build -f Dockerfile1 --build-arg REGION="$REGION" stage="dev" -t $REPOSITORY_URI:dev .
+      - docker build -f Dockerfile1 --build-arg REGION=$REGION stage="dev" -t $REPOSITORY_URI:dev .
       - docker build -f Dockerfile1 --build-arg REGION="$REGION"stage="nonprod" -t $REPOSITORY_URI:nonprod .
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:dev
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:nonprod
