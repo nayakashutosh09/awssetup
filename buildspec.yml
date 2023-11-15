@@ -1,45 +1,44 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
       nodejs: latest
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - echo $AWS_DEFAULT_REGION
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - STAGE=${STAGE:=dev}
+      - echo tag is $IMAGE_TAG
+      - echo stage is $STAGE
+      - echo Testing access
+      - echo Grabbing the current latest versions to reuse layers if possible
+      - echo "REGION is $REGION"
   build:
     commands:
-      - docker build --build-arg REGION=ZAF -t dev . 
-      - REGION=$(docker inspect --format ='{{index .Config.Labels "REGION"}}' dev)
-      - echo "REGION is $REGION"
-      - |
-        if ["REGION" == "ZAF"]; then
-          echo Logging in to Amazon ECR...
-          aws --version
-          echo $AWS_DEFAULT_REGION
-          REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
-          REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
-          aws sts get-caller-identity
-          echo Logging in to Amazon ECR...
-          curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json
-          aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/
-          echo $(pwd)
-          mkdir -p $(pwd)/vsr/tmp
-          echo ls $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/pipeline-config.json $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp
-          echo $(pwd)/vsr/tmp
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
-        elif ["REGION" == "MEX"]; then
-          echo "Ashu"
-        elif ["REGION" == "ARG"]; then
-          echo "xyz"
-        else
-          echo "xyzz"
-        fi
+      - echo Build started on `date`
+      - echo Building the Docker image.
+      - docker build -f Dockerfile1 --build-arg REGION="$REGION" stage="dev" -t $REPOSITORY_URI:dev .
+      - docker build -f Dockerfile1 --build-arg REGION="$REGION"stage="nonprod" -t $REPOSITORY_URI:nonprod .
+      - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:dev
+      - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:nonprod
+      - echo Build completed on `date`
+      - echo Pushing the Pipeline Docker images...
+      - docker push $REPOSITORY_URI:dev
+      - docker push $REPOSITORY_URI:nonprod
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo write definitions file...
+      - printf '[{"name":"development_mac","imageUri":"%s"}]' $REPOSITORY_URI:dev > docker_file.json
+artifacts:
+  files: docker_file.json
