@@ -5,6 +5,7 @@ phases:
       nodejs: latest
   build:
     commands:
+      - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.env
       - . variables.env
       - |
         if [ "REGION" == "ZAF" ]; then
