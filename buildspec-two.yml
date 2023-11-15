@@ -11,8 +11,8 @@ phases:
       - export $(cat variables.env | xargs)
       - |
         if [ "$REGION" == "ZAF" ]; then
-          - echo "Logging in to Amazon ECR..."
-          aws --version
+        - echo "Logging in to Amazon ECR..."
+        - aws --version
           echo $AWS_DEFAULT_REGION
           REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
           REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
