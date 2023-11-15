@@ -22,7 +22,6 @@ phases:
       - echo stage is $STAGE
       - echo Testing access
       - echo Grabbing the current latest versions to reuse layers if possible
-      - echo REGION is $REGION
   build:
     commands:
       - echo Build started on `date`
@@ -31,8 +30,6 @@ phases:
       - docker build -f Dockerfile1 --build-arg stage="nonprod" -t $REPOSITORY_URI:nonprod .
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:dev
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:nonprod
-      - REGION=$(docker inspect --format='{{index. Config.Labels "REGION"}}' dev)
-      - echo "REGION is $REGION"
       - echo Build completed on `date`
       - echo Pushing the Pipeline Docker images...
       - docker push $REPOSITORY_URI:dev
