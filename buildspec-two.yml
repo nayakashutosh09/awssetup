@@ -5,7 +5,7 @@ phases:
       nodejs: latest
   build:
     commands:
-      - source variables.env
+      - . source variables.env
       - |
         if [ "REGION" == "ZAF" ]; then
           - echo Logging in to Amazon ECR...
