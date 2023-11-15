@@ -5,7 +5,7 @@ phases:
       nodejs: latest
   build:
     commands:
-      - REGION=$(docker inspect --format ='{{inex .Config.Labels "REGION"}}' dev)
+      - REGION=$(docker inspect --format ='{{index .Config.Labels "REGION"}}' dev)
       - echo "REGION is $REGION"
       - |
         if ["REGION" == "ZAF"]; then
