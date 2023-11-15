@@ -6,7 +6,7 @@ phases:
   build:
     commands:
       - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.env
-      - echo ls $(pwd)
+      - echo ls $(pwd)/variables.env
       - echo $(pwd)
       - var_file_path=$(pwd)/variables.env
       - export $(cat var_file_path | xargs)
