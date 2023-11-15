@@ -6,14 +6,14 @@ phases:
   build:
     commands:
       - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.env
-      - echo ls 
+      - echo ls $(pwd)
       - echo $(pwd)
       - var_file_path=$(pwd)/variables.env
       - export $(cat var_file_path | xargs)
       - |
         if [ "$REGION" == "ZAF" ]; then
           echo Logging in to Amazon ECR...
-          - aws --version
+          aws --version
           echo $AWS_DEFAULT_REGION
           REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
           REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
