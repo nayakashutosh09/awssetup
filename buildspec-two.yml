@@ -8,8 +8,7 @@ phases:
       - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.env
       - echo $(pwd)
       - export $(cat $(pwd)/variables.env | xargs)
-      - |
-        if [ "REGION" == "ZAF" ]; then
+      - if [ "$REGION" == "ZAF" ]; then
           echo Logging in to Amazon ECR...
           aws --version
           echo $AWS_DEFAULT_REGION
