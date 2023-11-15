@@ -5,6 +5,7 @@ phases:
       nodejs: latest
   build:
     commands:
+      - docker build --build-arg REGION=ZAF -t dev . 
       - REGION=$(docker inspect --format ='{{index .Config.Labels "REGION"}}' dev)
       - echo "REGION is $REGION"
       - |
