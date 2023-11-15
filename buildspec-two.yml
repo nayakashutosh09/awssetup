@@ -8,11 +8,10 @@ phases:
       - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.env
       - echo ls $(pwd)/variables.env
       - echo $(pwd)
-     # - var_file_path=$(pwd)/variables.env
       - export $(cat variables.env | xargs)
       - |
         if [ "$REGION" == "ZAF" ]; then
-          echo Logging in to Amazon ECR...
+          - echo "Logging in to Amazon ECR..."
           aws --version
           echo $AWS_DEFAULT_REGION
           REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
