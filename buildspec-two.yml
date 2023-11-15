@@ -9,8 +9,7 @@ phases:
       - echo ls $(pwd)/variables.env
       - echo $(pwd)
       - export $(cat variables.env | xargs)
-      - |
-        if [ "$REGION" == "ZAF" ]; then
+      - if [ "$REGION" == "ZAF" ]; then
           echo "Logging in to Amazon ECR..."
           aws --version
           echo $AWS_DEFAULT_REGION
