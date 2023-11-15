@@ -129,6 +129,7 @@ phases:
           - aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file
         else
           echo "hey how are you"
+        fi
       
 #artifacts:
 #  files:
