@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export REGION="ZAF"
+REGION="ZAF"
