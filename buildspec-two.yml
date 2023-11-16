@@ -13,9 +13,9 @@ phases:
         done < $(pwd)/variables.txt
       - echo "REGION is" $REGION
       - |
-      - if [ "$REGION" == "ZAF" ]; then
+      - if [[ "$REGION" == "ZAF" ]]; then
           echo "A.....";
-        elif [ "$REGION" == "ARG" ]; then
+        elif [[ "$REGION" == "ARG" ]]; then
           echo "B.....";
         else
           echo "hey how are you";
