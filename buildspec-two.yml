@@ -18,8 +18,7 @@ phases:
           echo "Logging in to Amazon ECR...";
           - aws --version
           - echo $AWS_DEFAULT_REGION
-        elif [ "$REGION" = "ARG" ]; then
+        fi
+        if [ "$REGION" = "ARG" ]; then
           echo "B.....";
-        else
-          echo "hey how are you";
         fi
