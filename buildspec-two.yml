@@ -8,7 +8,7 @@ phases:
       - curl -LJ0 https://github.com/nayakashutosh09/awssetup/variables.txt
       - echo $(pwd)
       - |
-        while IFS=read -r line || [ -n "$line" ]; do
+        while IFS= read -r line || [ -n "$line" ]; do
           export "$line"
         done < $(pwd)/variables.txt
       - echo "REGION is" $REGION
