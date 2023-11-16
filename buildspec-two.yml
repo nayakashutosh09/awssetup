@@ -12,7 +12,7 @@ phases:
           export "$line"
         done < $(pwd)/variables.txt
       - echo "REGION is" $REGION
-       - |
+      - |
       - if [ "$REGION" = "ZAF" ]; then
           echo "A.....";
           echo "Logging in to Amazon ECR...";
