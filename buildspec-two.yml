@@ -16,20 +16,8 @@ phases:
       - if [ "$REGION" = "ZAF" ]; then
           echo "A.....";
           echo "Logging in to Amazon ECR...";
-          aws --version
-          echo $AWS_DEFAULT_REGION
-          REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model
-          REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline
-          aws sts get-caller-identity
-          echo Logging in to Amazon ECR...
-          curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json
-          aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/
-          echo $(pwd)
-          docker volume create volume_precision
-          mkdir -p $(pwd)/vsr/tmp
-          echo ls $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp
-          aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv $(pwd)/vsr/tmp
+          echo "aws --version"
+          echo "$AWS_DEFAULT_REGION"
         elif [ "$REGION" = "ARG" ]; then
           echo "B.....";
         else
