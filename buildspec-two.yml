@@ -16,8 +16,8 @@ phases:
       - if [ "$REGION" = "ZAF" ]; then
           echo "A.....";
           echo "Logging in to Amazon ECR...";
-          - aws --version
-          - echo $AWS_DEFAULT_REGION
+          aws --version
+          echo "$AWS_DEFAULT_REGION"
         fi
         if [ "$REGION" = "ARG" ]; then
           echo "B.....";
