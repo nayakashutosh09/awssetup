@@ -37,6 +37,14 @@ phases:
       - if [ "$REGION" = "ARG" ]; then
           echo "B.....";
         fi
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/grid.csv $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/rates.csv $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/pipeline-config.json $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp
+      - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp
       - echo $(pwd)/vsr/tmp
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
