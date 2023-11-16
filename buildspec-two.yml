@@ -12,10 +12,9 @@ phases:
           export "$line"
         done < $(pwd)/variables.txt
       - echo "REGION is" $REGION
-      - |
-        if [ "REGION" == $REGION ]; then
+      - if [ $REGION == "ZAF" ]; then
           echo "A.....";
-        elif [ "REGION" == $REGION ]; then
+        elif [ $REGION == "ARG" ]; then
           echo "B.....";
         else
           echo "hey how are you";
