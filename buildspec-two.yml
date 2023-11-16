@@ -18,7 +18,7 @@ phases:
           echo "Logging in to Amazon ECR...";
           echo "$AWS_DEFAULT_REGION";
         fi
-       - |
-       - if [ "$REGION" = "ARG" ]; then
+      - |
+      - if [ "$REGION" = "ARG" ]; then
           echo "B.....";
-         fi
+        fi
