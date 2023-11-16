@@ -26,10 +26,10 @@ phases:
           echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/)";
           echo "$(pwd)";
 
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv '$(pwd)'/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json '$(pwd)'/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh '$(pwd)'/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh '$(pwd)'/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/'$(REGION)'/calibrateddata.csv '$(pwd)'/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/'$(REGION)'/regionaldata.json '$(pwd)'/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/'$(REGION)'/runh2o.sh '$(pwd)'/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/'$(REGION)'/runpsp.sh '$(pwd)'/vsr/tmp)";
         fi
       - |
       - if [ "$REGION" = "ARG" ]; then
