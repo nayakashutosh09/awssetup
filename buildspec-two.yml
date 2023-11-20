@@ -52,7 +52,7 @@ phases:
           echo "$(aws sts get-caller-identity)";
           echo "Logging in to Amazon ECR...";
           echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
-          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ARG/)";
           echo "$(pwd)";
           echo "$(mkdir -p $(pwd)/vsr/tmp)";
           echo "$(ls $(pwd)/vsr/tmp)";
@@ -73,7 +73,7 @@ phases:
           echo "$(aws sts get-caller-identity)";
           echo "Logging in to Amazon ECR...";
           echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
-          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/BRA/)";
           echo "$(pwd)";
           echo "$(mkdir -p $(pwd)/vsr/tmp)";
           echo "$(ls $(pwd)/vsr/tmp)";
@@ -94,7 +94,7 @@ phases:
           echo "$(aws sts get-caller-identity)";
           echo "Logging in to Amazon ECR...";
           echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
-          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/MEX/)";
           echo "$(pwd)";
           echo "$(mkdir -p $(pwd)/vsr/tmp)";
           echo "$(ls $(pwd)/vsr/tmp)";
@@ -106,7 +106,7 @@ phases:
         fi
       - |
       - if [ "$REGION" = "EME" ]; then
-          echo "MEX..............................................................................................";
+          echo "EME..............................................................................................";
           echo "Logging in to Amazon ECR...";
           echo "$AWS_DEFAULT_REGION";
           echo "$(aws --version)";
@@ -115,7 +115,7 @@ phases:
           echo "$(aws sts get-caller-identity)";
           echo "Logging in to Amazon ECR...";
           echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
-          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/EME/)";
           echo "$(pwd)";
           echo "$(mkdir -p $(pwd)/vsr/tmp)";
           echo "$(ls $(pwd)/vsr/tmp)";
@@ -124,6 +124,26 @@ phases:
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/EME/regionaldata.json $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/EME/runh2o.sh $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/EME/runpsp.sh $(pwd)/vsr/tmp)";   
+        fi
+      - |
+      - if [ "$REGION" = "USA" ]; then
+          echo "USA..............................................................................................";
+          echo "Logging in to Amazon ECR...";
+          echo "$AWS_DEFAULT_REGION";
+          echo "$(aws --version)";
+          echo "$(REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model)";
+          echo "$(REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline)";
+          echo "$(aws sts get-caller-identity)";
+          echo "Logging in to Amazon ECR...";
+          echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/USA/)";
+          echo "$(pwd)";
+          echo "$(mkdir -p $(pwd)/vsr/tmp)";
+          echo "$(ls $(pwd)/vsr/tmp)";
+
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/USA/runpsp.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/USA/ecpoints.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/USA/GxExT.csv $(pwd)/vsr/tmp)";
         fi
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh $(pwd)/vsr/tmp
@@ -181,13 +201,22 @@ phases:
         fi
       - |
       - if [ "$REGION" = "EME" ]; then
-          echo "MEX..............................................................................................";
+          echo "EME..............................................................................................";
           echo "$(docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container2:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/)";
           echo "$(docker start container2)";
           echo "$(docker exec -i container2 /bin/bash -c 'ls /vsr/tmp')";
           echo "$(docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh)";
+        fi
+      - |
+      - if [ "$REGION" = "USA" ]; then
+          echo "USA..............................................................................................";
+          echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/ecpoints.csv container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/GxExT.csv container2:/vsr/tmp/)";
+          echo "$(docker start container2)";
+          echo "$(docker exec -i container2 /bin/bash -c 'ls /vsr/tmp')";
         fi
       - docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
       - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/
@@ -227,9 +256,16 @@ phases:
         fi
       - | 
       - if [ "$REGION" = "EME" ]; then
-          echo "MEX..............................................................................................";
+          echo "EME..............................................................................................";
           echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
+        fi
+      - | 
+      - if [ "$REGION" = "USA" ]; then
+          echo "USA..............................................................................................";
+          echo "$(docker cp $(pwd)/vsr/tmp/ecpoints.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/GxExT.csv container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
         fi
       - docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/
