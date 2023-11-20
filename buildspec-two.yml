@@ -53,12 +53,12 @@ phases:
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/pipeline-config.json $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp)";
-          echo "$(pwd)/vsr/tmp";
+          echo "$((pwd)/vsr/tmp)";
           echo "$(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com)";
           echo "$(docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev)";
           echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/yieldpotential.csv container2:/vsr/tmp/)";
-          echo "$docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/)";
       - |
       - if [ "$REGION" = "ZAF" ]; then
           echo "$(docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/)";
