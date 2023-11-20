@@ -71,17 +71,17 @@ phases:
           echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container2:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/)";
         fi
-      - docker start container2
-      - docker exec -i container2 /bin/bash -c "ls /vsr/tmp"
-      - docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh
-      - docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev
-      - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/yieldpotential.csv container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/
-      - docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/
+          echo "$(docker start container2)";
+          echo "$(docker exec -i container2 /bin/bash -c 'ls /vsr/tmp')";
+          echo "$(docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh)";
+          echo "$(docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-pipeline:dev)";
+          echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/yieldpotential.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/)";
       - |
       - if [ "$REGION" = "ZAF" ]; then
           echo "$(docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/)";
