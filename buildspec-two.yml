@@ -53,7 +53,7 @@ phases:
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/pipeline-config.json $(pwd)/vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xml $(pwd)/vsr/tmp
       - aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/prescription.xsd $(pwd)/vsr/tmp
-      - echo (pwd)/vsr/tmp
+      - echo $(pwd)/vsr/tmp
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
       - docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/vsr-h2o-model:dev
       - docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/
@@ -95,4 +95,13 @@ phases:
           echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
-        fi        
+        fi
+            - docker start container3
+      - docker exec -i container3 /bin/bash -c "ls /vsr/tmp/"
+      - docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh
+      - docker exec -i container3 /bin/bash -c "head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml"
+      - docker start container3
+      - docker exec -i container3 /bin/bash -c "cat /vsr/tmp/prescription_bkp.xml"
+      - docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/
+      - echo ls $(pwd)/vsr/tmp
+      - aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file
