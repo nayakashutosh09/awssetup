@@ -96,7 +96,7 @@ phases:
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
         fi
-            - docker start container3
+      - docker start container3
       - docker exec -i container3 /bin/bash -c "ls /vsr/tmp/"
       - docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh
       - docker exec -i container3 /bin/bash -c "head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml"
