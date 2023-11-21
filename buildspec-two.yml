@@ -31,10 +31,10 @@ phases:
           echo "$($REGION)"
           echo "$('$REGION')"
           echo "$REGION"
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runpsp.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/calibrateddata.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/regionaldata.json $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runh2o.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runpsp.sh $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/variables_file.sh $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/yieldpotential.csv $(pwd)/vsr/tmp)";
