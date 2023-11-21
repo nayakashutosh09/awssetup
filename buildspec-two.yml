@@ -28,7 +28,9 @@ phases:
           echo "$(pwd)";
           echo "$(mkdir -p $(pwd)/vsr/tmp)";
           echo "$(ls $(pwd)/vsr/tmp)";
-
+          echo "$($REGION)"
+          echo "$('$REGION')"
+          echo "$REGION"
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/calibrateddata.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/regionaldata.json $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/ZAF/runh2o.sh $(pwd)/vsr/tmp)";
