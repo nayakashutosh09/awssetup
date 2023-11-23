@@ -31,7 +31,7 @@ phases:
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runh2o.sh $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runpsp.sh $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/variables_file.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/variables.txt $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/yieldpotential.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/grid.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/rates.csv $(pwd)/vsr/tmp)";
@@ -84,6 +84,7 @@ phases:
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/ecpoints.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/GxExT.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/variables.txt $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/grid.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/rates.csv $(pwd)/vsr/tmp)";
           echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/pipeline-config.json $(pwd)/vsr/tmp)";
