@@ -1,6 +1,5 @@
-FROM ubuntu:xenial
-
-FROM ubuntu:xenial
+#FROM ubuntu:xenial
+FROM public.ecr.aws/docker/library/ubuntu:xenial
 
 RUN apt-get -qq -y clean \
  && apt-get -qq -y update \
