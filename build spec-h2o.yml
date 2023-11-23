@@ -9,9 +9,10 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - PIPELINE_URI=${PIPELINE_URL}
-      - H2O_URI=${H2O_URL}
+      - echo $AWS_DEFAULT_REGION
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
+      - PIPELINE_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+      - H2O_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       - STAGE=${STAGE:=dev}
@@ -19,8 +20,6 @@ phases:
       - echo stage is $STAGE
       - echo Testing access
       - echo Grabbing the current latest versions to reuse layers if possible
-#      - docker pull $PIPELINE_URI:latest
-      - docker pull $H2O_URI:latest
   build:
     commands:
       - echo Build started on `date`
@@ -39,11 +38,6 @@ phases:
         --build-arg stage=nonprod
         -t $H2O_URI:nonprod .
       - >
-        ## docker build -f Dockerfile-h2o
-        ## --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        ## --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
-        ## --build-arg stage=prod
-        ## -t $H2O_URI:prod .
       - docker tag $H2O_URI:nonprod $H2O_URI:$IMAGE_TAG
       - docker tag $H2O_URI:nonprod $H2O_URI:latest
       - echo Pushing the H2O Docker images...
