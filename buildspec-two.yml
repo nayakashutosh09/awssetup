@@ -65,12 +65,12 @@ phases:
           echo "$(docker start container3)";
           echo "$(docker exec -i container3 /bin/bash -c 'ls /vsr/tmp/')";
           echo "$(docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh)";
-          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml')";
+          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/Generated_Prescription.xml')";
           echo "$(docker start container3)";
-          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/prescription_bkp.xml')";
-          echo "$(docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/)";
+          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker cp container3:/vsr/tmp/Generated_Prescription.xml $(pwd)/vsr/tmp/)";
           echo "$(echo ls $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/)";
+          echo "$(aws s3 cp $(pwd)/vsr/tmp/Generated_Prescription.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/$REGION/)";
         fi
       - |
       - if [ "$REGION" = "USA" ]; then
@@ -104,10 +104,10 @@ phases:
           echo "$(docker start container3)";
           echo "$(docker exec -i container3 /bin/bash -c 'ls /vsr/tmp/')";
           echo "$(docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh)";
-          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/prescription_bkp.xml')";
+          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/Generated_Prescription.xml')";
           echo "$(docker start container3)";
-          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/prescription_bkp.xml')";
-          echo "$(docker cp container3:/vsr/tmp/prescription_bkp.xml $(pwd)/vsr/tmp/)";
+          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker cp container3:/vsr/tmp/Generated_Prescription.xml $(pwd)/vsr/tmp/)";
           echo "$(echo ls $(pwd)/vsr/tmp)";
-          echo "$(aws s3 cp $(pwd)/vsr/tmp/prescription_bkp.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/)";
+          echo "$(aws s3 cp $(pwd)/vsr/tmp/Generated_Prescription.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/$REGION/)";
         fi
