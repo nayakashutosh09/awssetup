@@ -31,13 +31,11 @@ phases:
       - >
         docker build -f Dockerfile-h2o
         --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
         --build-arg stage=dev
         -t $H2O_URI:dev .
       - >
         docker build -f Dockerfile-h2o
         --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
         --build-arg stage=nonprod
         -t $H2O_URI:nonprod .
       - >
@@ -46,7 +44,6 @@ phases:
       - echo Pushing the H2O Docker images...
       - docker push $H2O_URI:dev
       - docker push $H2O_URI:nonprod
-      - ## docker push $H2O_URI:prod
       - docker push $H2O_URI:$IMAGE_TAG
       - docker push $H2O_URI:latest
 
