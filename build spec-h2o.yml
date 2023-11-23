@@ -1,0 +1,70 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - PIPELINE_URI=${PIPELINE_URL}
+      - H2O_URI=${H2O_URL}
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - STAGE=${STAGE:=dev}
+      - echo tag is $IMAGE_TAG
+      - echo stage is $STAGE
+      - echo Testing access
+      - echo Grabbing the current latest versions to reuse layers if possible
+      - docker pull $PIPELINE_URI:latest
+      - docker pull $H2O_URI:latest
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Pipeline Docker image...
+      - docker build -f Dockerfile --build-arg stage="dev"     -t $PIPELINE_URI:dev .
+      - docker build -f Dockerfile --build-arg stage="nonprod" -t $PIPELINE_URI:nonprod .
+      - ## docker build -f Dockerfile --build-arg stage="prod"    -t $PIPELINE_URI:prod .
+      - docker tag $PIPELINE_URI:nonprod $PIPELINE_URI:$IMAGE_TAG
+      - docker tag $PIPELINE_URI:nonprod $PIPELINE_URI:latest
+      - echo Build completed on `date`
+      - echo Pushing the Pipeline Docker images...
+      - docker push $PIPELINE_URI:dev
+      - docker push $PIPELINE_URI:nonprod
+      - ## docker push $PIPELINE_URI:prod
+      - docker push $PIPELINE_URI:$IMAGE_TAG
+      - docker push $PIPELINE_URI:latest
+      - echo Building the H2O Docker image...
+      - >
+        docker build -f Dockerfile-h2o
+        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+        --build-arg stage=dev
+        -t $H2O_URI:dev .
+      - >
+        docker build -f Dockerfile-h2o
+        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+        --build-arg stage=nonprod
+        -t $H2O_URI:nonprod .
+      - >
+        ## docker build -f Dockerfile-h2o
+        ## --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        ## --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+        ## --build-arg stage=prod
+        ## -t $H2O_URI:prod .
+      - docker tag $H2O_URI:nonprod $H2O_URI:$IMAGE_TAG
+      - docker tag $H2O_URI:nonprod $H2O_URI:latest
+      - echo Pushing the H2O Docker images...
+      - docker push $H2O_URI:dev
+      - docker push $H2O_URI:nonprod
+      - ## docker push $H2O_URI:prod
+      - docker push $H2O_URI:$IMAGE_TAG
+      - docker push $H2O_URI:latest
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
