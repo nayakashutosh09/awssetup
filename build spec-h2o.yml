@@ -28,11 +28,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Pipeline Docker image...
       - echo Building the H2O Docker image...
-      - >
-        docker build -f Dockerfile-h2o --build-arg stage="dev" -t $H2O_URI:dev .
-      - >
-        docker build -f Dockerfile-h2o --build-arg stage="nonprod" -t $H2O_URI:nonprod .
-      - >
+      - docker build -f Dockerfile-h2o --build-arg stage="dev" -t $H2O_URI:dev .
+      - docker build -f Dockerfile-h2o --build-arg stage="nonprod" -t $H2O_URI:nonprod .
       - docker tag $H2O_URI:nonprod $H2O_URI:$IMAGE_TAG
       - docker tag $H2O_URI:nonprod $H2O_URI:latest
       - echo Pushing the H2O Docker images...
