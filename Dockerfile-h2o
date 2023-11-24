@@ -72,6 +72,7 @@ CMD pip3 install -r requirements.txt \
  && rm -f requirements.txt
 
 RUN mkdir -p /vsr/tmp
+RUN curl -0 
 RUN aws s3 cp s3://dsso-ss-analytics/models/Mod_5.0_QC5 /vsr/tmp
 COPY ApiIntegration.py run-h2o.py R /vsr/pipeline/
 
