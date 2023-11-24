@@ -53,7 +53,7 @@ RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive
 #RUN Rscript -e "require(devtools); devtools::install_version('h2o', repos='https://cran.r-project.org/src/contrib/Archive/h2o/h2o_3.40.0.4.tar.gz')"
 
 COPY requirements-h2o.txt /requirements.txt
-RUN pip3 install -r requirements.txt \
+CMD pip3 install -r requirements.txt \
  && rm -f requirements.txt
 
 RUN mkdir -p /vsr/tmp
