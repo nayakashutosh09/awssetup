@@ -47,7 +47,11 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 ARG AWS_DEFAULT_REGION
 ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
 
-RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/argparse/argparse_1.1.1.tar.gz")' && \
+RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/findpython/findpython_1.0.3.tar.gz")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/getopt/getopt_1.20.2.tar.gz")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/proto_1.0.0.tar.gz")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/jsonlite_1.8.7.tar.gz")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/argparse/argparse_1.1.1.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/RCurl_1.98-1.13.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtable/gtable_0.3.0.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/rlang/rlang_0.4.12.tar.gz")' && \
@@ -58,7 +62,6 @@ RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/argpa
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/utf8/utf8_1.2.2.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/ellipsis_0.3.2.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/vctrs/vctrs_0.3.8.tar.gz")' && \
-    R -e 'install.packages("https://cran.r-project.org/src/contrib/jsonlite_1.8.7.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/bitops_1.0-7.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/RCurl/RCurl_1.95-4.11.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/h2o/h2o_3.10.4.4.tar.gz")'
