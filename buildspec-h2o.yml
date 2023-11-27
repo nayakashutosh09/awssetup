@@ -27,20 +27,20 @@ phases:
       - echo Build started on `date`
       - echo Building the Pipeline Docker image...
       - echo Building the H2O Docker image...
-      - docker build -f Dockerfile-h2o --build-arg stage="dev" -t 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev .
-      - docker build -f Dockerfile-h2o --build-arg stage="nonprod" -t 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:nonprod .
-#      - >
-#        docker build -f Dockerfile-h2o
-#        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-#        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
-#        --build-arg stage="dev"
-#        -t $H2O_URI:dev .
-#      - >
-#        docker build -f Dockerfile-h2o
-#        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-#        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
-#        --build-arg stage="nonprod"
-#        -t $H2O_URI:nonprod .
+#      - docker build -f Dockerfile-h2o --build-arg stage="dev" -t 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev .
+#      - docker build -f Dockerfile-h2o --build-arg stage="nonprod" -t 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:nonprod .
+      - >
+        docker build -f Dockerfile-h2o
+        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+        --build-arg stage="dev"
+        -t $H2O_URI:dev .
+      - >
+        docker build -f Dockerfile-h2o
+        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+        --build-arg stage="nonprod"
+        -t $H2O_URI:nonprod .
       - docker tag $H2O_URI:dev $H2O_URI:dev
       - docker tag $H2O_URI:nonprod $H2O_URI:nonprod
       - echo Pushing the H2O Docker images...
