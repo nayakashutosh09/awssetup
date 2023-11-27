@@ -74,8 +74,6 @@ RUN pip install --upgrade pip==20.3.4 && \
 
 RUN mkdir -p /vsr/tmp
 RUN aws s3 cp s3://dsso-ss-analytics/models/Mod_5.0_QC5 /vsr/tmp
-RUN wget https://github.com/nayakashutosh09/awssetup/blob/main/ApiIntegration.py && \
-    wget https://github.com/nayakashutosh09/awssetup/blob/main/run-h2o.py
 COPY ApiIntegration.py run-h2o.py R /vsr/pipeline/
 
 ARG stage=dev
