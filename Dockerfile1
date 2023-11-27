@@ -58,10 +58,11 @@ RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtabl
     R -e 'install.packages("https://cran.r-project.org/src/contrib/R6_2.5.1.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/RColorBrewer/RColorBrewer_1.1-2.tar.gz")'
 
-#FROM public.ecr.aws/docker/library/node:18-alpine
-#RUN npm install express
-#EXPOSE 3000
-#CMD [ "npm", "start" ]
+ARG stage=dev
+ENV STAGE=${stage}
+
+CMD /bin/bash
+
 
 FROM public.ecr.aws/docker/library/node:18-alpine
 WORKDIR /app
