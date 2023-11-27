@@ -46,8 +46,6 @@ phases:
       - echo Pushing the H2O Docker images...
       - docker push $H2O_URI:dev
       - docker push $H2O_URI:nonprod
-      - docker push $H2O_URI:$IMAGE_TAG
-      - docker push $H2O_URI:latest
 
   post_build:
     commands:
