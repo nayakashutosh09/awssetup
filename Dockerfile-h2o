@@ -34,7 +34,7 @@ RUN apt-get -qq -y clean \
             python3-pandas \
             r-base-core \
             r-base-dev \
- && pip3 install --upgrade pip \
+ && pip install --upgrade pip==20.3.4 \
  && apt-get autoclean && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
