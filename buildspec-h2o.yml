@@ -14,7 +14,8 @@ phases:
       - aws --version
       - echo $AWS_DEFAULT_REGION
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com
-      - H2O_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+#      - H2O_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+      - H2O_URI=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-h20-table-generation
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       - STAGE=${STAGE:=dev}
