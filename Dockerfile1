@@ -12,13 +12,11 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     apt-get install -y nodejs npm && \
     apt-get install -y software-properties-common
 
+FROM public.ecr.aws/docker/library/node:18-alpine
 WORKDIR /app
 COPY . .
-
 RUN npm install express
-
-CMD ["node"]
-
+CMD ["node", "index.js"]
 EXPOSE 3000
 
 #RUN apt-get -qq update -y \
