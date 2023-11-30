@@ -12,6 +12,9 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     apt-get install -y nodejs npm && \
     apt-get install -y software-properties-common
 
+WORKDIR /app
+COPY . .
+
 RUN apt-get -qq update -y \
  && apt-get -qq upgrade -y \
  && apt-get -qq --fix-missing install -y \
