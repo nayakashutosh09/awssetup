@@ -69,7 +69,9 @@ ENV STAGE=${stage}
 
 EXPOSE 3000
 
-CMD ["npm","start","/bin/bash"]
+CMD /bin/bash
+
+CMD ["npm","start"]
 
 
 #FROM public.ecr.aws/docker/library/node:18-alpine
