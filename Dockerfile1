@@ -15,7 +15,8 @@ RUN export LANGUAGE="en_US.UTF-8" && \
 
 #FROM public.ecr.aws/docker/library/node:18-alpine
 
-RUN npm install express
+RUN npm init -y && \
+    npm install express 
 
 RUN apt-get -qq update -y \
  && apt-get -qq upgrade -y \
