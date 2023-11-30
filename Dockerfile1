@@ -13,7 +13,6 @@ RUN export LANGUAGE="en_US.UTF-8" && \
     apt-get install -y nodejs npm && \
     apt-get install -y software-properties-common
 
-#FROM public.ecr.aws/docker/library/node:18-alpine
 
 RUN npm init -y && \
     npm install express 
@@ -68,18 +67,7 @@ RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtabl
 ARG stage=dev
 ENV STAGE=${stage}
 
-#EXPOSE 3000
-
 #CMD /bin/bash
-
-#CMD ["npm","start"]
 
 CMD ["node", "index.js"]
 EXPOSE 3000
-
-#FROM public.ecr.aws/docker/library/node:18-alpine
-#WORKDIR /app
-#COPY . .
-#RUN npm install express
-#CMD ["node", "index.js"]
-#EXPOSE 3000
