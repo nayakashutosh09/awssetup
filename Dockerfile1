@@ -15,11 +15,11 @@ RUN export LANGUAGE="en_US.UTF-8" && \
 WORKDIR /app
 COPY . .
 
-RUN npm install
+RUN npm install express
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["node"]
 
 #RUN apt-get -qq update -y \
 # && apt-get -qq upgrade -y \
