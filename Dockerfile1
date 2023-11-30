@@ -61,9 +61,9 @@ RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtabl
 ARG stage=dev
 ENV STAGE=${stage}
 
-EXPOSE 8080
+EXPOSE 3000
 
-CMD ["./bin/bash"]
+CMD ["/bin/bash"]
 
 
 #FROM public.ecr.aws/docker/library/node:18-alpine
