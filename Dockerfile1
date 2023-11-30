@@ -17,9 +17,9 @@ COPY . .
 
 RUN npm install express
 
-EXPOSE 3000
-
 CMD ["node"]
+
+EXPOSE 3000
 
 #RUN apt-get -qq update -y \
 # && apt-get -qq upgrade -y \
