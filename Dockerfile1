@@ -40,6 +40,8 @@ RUN apt-get -qq update -y \
  && apt-get autoclean && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN npm install
+
 RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtable/gtable_0.3.0.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/rlang/rlang_0.4.12.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/glue/glue_1.6.0.tar.gz")' && \
@@ -63,7 +65,7 @@ ENV STAGE=${stage}
 
 EXPOSE 3000
 
-CMD ["/bin/bash"]
+CMD ["npm","start","/bin/bash"]
 
 
 #FROM public.ecr.aws/docker/library/node:18-alpine
