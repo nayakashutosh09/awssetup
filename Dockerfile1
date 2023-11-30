@@ -4,6 +4,10 @@ FROM public.ecr.aws/lts/ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+WORKDIR /app
+
+COPY . .
+
 RUN export LANGUAGE="en_US.UTF-8" && \
     ln -s /usr/share/zoneinfo/UTC /etc/localtime && \
     apt-get clean && \
