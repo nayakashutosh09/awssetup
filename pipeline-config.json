@@ -125,7 +125,7 @@
   },
   "zaf": {
     "minpop": 80000,
-    "maxpop": 130000,
+    "maxpop": 120000,
     "minarea": 1,
     "maxarea": 500,
     "perform_smoothing": false,
