@@ -1,0 +1,26 @@
+{
+  "usage": "size = config[{stage}]; column = config[{model}][size]",
+  "version": "$Id: 792e43edef7a3b9c7e089a800a44d4b3483e8a64 $",
+  "dev":     "hac0250",
+  "nonprod": "hac0250",
+  "prod":    "hac0250",
+  "ec-plana": {
+    "hac0002": "hac2_0002_label",
+    "hac0004": "hac2_0004_label",
+    "hac0008": "hac2_0008_label",
+    "hac0010": "hac2_0010_label",
+    "hac0020": "hac2_0020_label",
+    "hac0030": "hac2_0030_label",
+    "hac0050": "hac2_0050_label",
+    "hac0100": "hac2_0100_label",
+    "hac0250": "hac2_0250_label",
+    "hac0500": "hac2_0500_label",
+    "hac0750": "hac2_0750_label",
+    "hac1000": "hac2_1000_label",
+    "hac1250": "hac2_1250_label",
+    "hac1500": "hac2_1500_label",
+    "hac1750": "hac2_1750_label",
+    "hac2000": "hac2_2000_label"
+  }
+}
+
