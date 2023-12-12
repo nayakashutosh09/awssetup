@@ -48,6 +48,7 @@ ARG AWS_DEFAULT_REGION
 ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
 
 RUN R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/findpython/findpython_1.0.3.tar.gz")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/argparser/argparser_0.6.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/getopt/getopt_1.20.2.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/proto_1.0.0.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/jsonlite/jsonlite_1.8.7.tar.gz")' && \
