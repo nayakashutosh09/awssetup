@@ -1,0 +1,113 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+  build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - echo $AWS_DEFAULT_REGION
+      - REPOSITORY_URI1=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-h20-table-generation
+      - REPOSITORY_URI2=374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation
+      - aws sts get-caller-identity
+      - echo Logging in to Amazon ECR...
+      - echo $(pwd)
+      - |
+        while IFS= read -r line || [ -n "$line" ]; do
+          export "$line"
+        done < $(pwd)/variables.txt
+      - echo "REGION is" $REGION
+      - |
+      - if [ "$REGION" = "ZAF" ] || [ "$REGION" = "ARG" ] || [ "$REGION" = "BRA" ] || [ "$REGION" = "MEX" ] || [ "$REGION" = "EME" ]; then
+          echo "$REGION..............................................................................................";
+          echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/)";
+          echo "$(pwd)";
+          echo "$(mkdir -p $(pwd)/vsr/tmp)";
+          echo "$(ls $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/calibrateddata.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/regionaldata.json $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runh2o.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runpsp.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/variables.txt $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/yieldpotential.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/grid.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/rates.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/pipeline-config.json $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/prescription.xml $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/prescription.xsd $(pwd)/vsr/tmp)";
+          echo "$(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com)";
+          echo "$(docker run -i --name container2 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-h20-table-generation:dev)";
+          echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/yieldpotential.csv container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/grid.csv container2:/vsr/tmp/)";
+
+          echo "$(docker cp $(pwd)/vsr/tmp/runh2o.sh container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container2:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/)";
+          echo "$(docker start container2)";
+          echo "$(docker exec -i container2 /bin/bash -c 'ls /vsr/tmp')";
+          echo "$(docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh)";
+          echo "$(docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev)";
+          echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/yieldpotential.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/calibrateddata.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/runh2o.sh container3:/vsr/tmp/)";
+          echo "$(docker start container3)";
+          echo "$(docker exec -i container3 /bin/bash -c 'ls /vsr/tmp/')";
+          echo "$(docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh)";
+          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker start container3)";
+          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker cp container3:/vsr/tmp/Generated_Prescription.xml $(pwd)/vsr/tmp/)";
+          echo "$(echo ls $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp $(pwd)/vsr/tmp/Generated_Prescription.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/$REGION/)";
+        fi
+      - |
+      - if [ "$REGION" = "USA" ]; then
+          echo "USA..............................................................................................";
+          echo "$(curl -LJ0 https://github.com/nayakashutosh09/awssetup/pipeline-config.json)";
+          echo "$(aws s3 cp pipeline-config.json s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/)";
+          echo "$(pwd)";
+          echo "$(mkdir -p $(pwd)/vsr/tmp)";
+          echo "$(ls $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/runpsp.sh $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/ecpoints.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/GxExT.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/Mod_5.0_QC5 $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/variables.txt $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/grid.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/rates.csv $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/pipeline-config.json $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/prescription.xml $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp s3://ci-cd-pipeline-precision-ag/Model_Management/$REGION/prescription.xsd $(pwd)/vsr/tmp)";
+          echo "$(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 374898892977.dkr.ecr.us-east-1.amazonaws.com)";
+          echo "$(docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev)";
+          echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/grid.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/rates.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/pipeline-config.json container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xml container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/ecpoints.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/GxExT.csv container3:/vsr/tmp/)";
+          echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
+          echo "$(docker start container3)";
+          echo "$(docker exec -i container3 /bin/bash -c 'ls /vsr/tmp/')";
+          echo "$(docker exec -i container3 /bin/bash /vsr/tmp/runpsp.sh)";
+          echo "$(docker exec -i container3 /bin/bash -c 'head -n 10 /vsr/tmp/prescription.xml > /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker start container3)";
+          echo "$(docker exec -i container3 /bin/bash -c 'cat /vsr/tmp/Generated_Prescription.xml')";
+          echo "$(docker cp container3:/vsr/tmp/Generated_Prescription.xml $(pwd)/vsr/tmp/)";
+          echo "$(echo ls $(pwd)/vsr/tmp)";
+          echo "$(aws s3 cp $(pwd)/vsr/tmp/Generated_Prescription.xml s3://ci-cd-pipeline-precision-ag/Model_Management/prescription_file/$REGION/)";
+        fi
