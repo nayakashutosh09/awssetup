@@ -49,6 +49,10 @@ phases:
           echo "$(docker cp $(pwd)/vsr/tmp/regionaldata.json container2:/vsr/tmp/)";
           echo "$(docker start container2)";
           echo "$(docker exec -i container2 /bin/bash -c 'ls /vsr/tmp')";
+
+          echo "$(docker exec -i container2 /bin/bash -c 'chmod 777 /vsr/tmp/*'))";
+          echo "$(docker exec -i container2 /bin/bash -c 'chmod 777 /vsr/pipeline/*'))";
+          
           echo "$(docker exec -i container2 /bin/bash /vsr/tmp/runh2o.sh)";
           echo "$(docker run -i --name container3 374898892977.dkr.ecr.us-east-1.amazonaws.com/isr-table-generation:dev)";
           echo "$(docker cp $(pwd)/vsr/tmp/Mod_5.0_QC5 container3:/vsr/tmp/)";
