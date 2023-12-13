@@ -256,7 +256,9 @@ COPY R ApiIntegration.py run-engine.py /vsr/pipeline/
 ARG stage=dev
 ENV STAGE=${stage}
 
-CMD /bin/bash
+#CMD /bin/bash
 
 CMD ["node", "index.js"]
 EXPOSE 3000
+
+CMD /bin/bash
