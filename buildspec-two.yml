@@ -108,6 +108,10 @@ phases:
           echo "$(docker cp $(pwd)/vsr/tmp/prescription.xsd container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/ecpoints.csv container3:/vsr/tmp/)";
           echo "$(docker cp $(pwd)/vsr/tmp/GxExT.csv container3:/vsr/tmp/)";
+
+          echo "$(docker exec -i container3 /bin/bash -c 'chmod 777 /vsr/tmp/*'))";
+          echo "$(docker exec -i container3 /bin/bash -c 'chmod 777 /vsr/pipeline/*'))";
+          
           echo "$(docker cp $(pwd)/vsr/tmp/runpsp.sh container3:/vsr/tmp/)";
           echo "$(docker start container3)";
           echo "$(docker exec -i container3 /bin/bash -c 'ls /vsr/tmp/')";
