@@ -1,9 +1,9 @@
 FROM public.ecr.aws/lts/ubuntu:20.04
 
-#WORKDIR /app
-#COPY . .
+WORKDIR /app
+COPY . .
 
-#ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN export LANGUAGE="en_US.UTF-8" && \
     ln -s /usr/share/zoneinfo/UTC /etc/localtime && \
@@ -256,9 +256,9 @@ COPY R ApiIntegration.py run-engine.py /vsr/pipeline/
 ARG stage=dev
 ENV STAGE=${stage}
 
-CMD /bin/bash
-
-#CMD ["node", "index.js"]
-#EXPOSE 3000
-
 #CMD /bin/bash
+
+CMD ["node", "index.js"]
+EXPOSE 3000
+
+CMD /bin/bash
