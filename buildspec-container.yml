@@ -27,21 +27,14 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image.
       - >
-        docker build -f Dockerfile
+        docker build -f Dockerfile_Container
         --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
         --build-arg stage=dev
         -t $REPOSITORY_URI:dev .
-      - >
-        docker build -f Dockerfile
-        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        --build-arg stage=nonprod
-        -t $REPOSITORY_URI:nonprod .
       - docker tag $REPOSITORY_URI:dev $REPOSITORY_URI:$IMAGE_TAG
-      - docker tag $REPOSITORY_URI:nonprod $REPOSITORY_URI:$IMAGE_TAG
       - echo Build completed on `date`
       - echo Pushing the Pipeline Docker images...
       - docker push $REPOSITORY_URI:dev
-      - docker push $REPOSITORY_URI:nonprod
   post_build:
     commands:
       - echo Build completed on `date`
